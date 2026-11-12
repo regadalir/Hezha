@@ -1,0 +1,49 @@
+name: HazhirKeyboard
+options:
+  bundleIdPrefix: com.hazhirhezha
+  deploymentTarget:
+    iOS: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  HazhirKeyboard:
+    type: application
+    platform: iOS
+    sources: [App]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.hazhirhezha.keyboard
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Hazhir Keyboard
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    dependencies:
+      - target: Keyboard
+  Keyboard:
+    type: app-extension
+    platform: iOS
+    sources: [Keyboard]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.hazhirhezha.keyboard.ext
+    info:
+      path: Keyboard/Info.plist
+      properties:
+        CFBundleDisplayName: کوردی - Hazhir
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.keyboard-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).KeyboardViewController
+          NSExtensionAttributes:
+            IsASCIICapable: false
+            PrefersRightToLeft: true
+            PrimaryLanguage: ckb
+            RequestsOpenAccess: false
